@@ -45,7 +45,8 @@
 
 // Cálculo automático: (200 pasos / 360°) * 180° = 100 pasos
 #define PASOS_180   (PASOS_POR_REVOLUCION / 4)  // 100 pasos para 180°/* USER CODE END PD */
-//#define PASOS_180   (PASOS_POR_REVOLUCION / 4)
+// Función para calcular pasos según ángulo
+#define ANGULO_A_PASOS(angulo)  ((int)((angulo * PASOS_POR_REVOLUCION) / 360.0f))
 
 
 
@@ -58,7 +59,6 @@ void Motor_Girar180(uint8_t direccion);
 
 void Motor_GirarAngulo(float angulo, uint8_t direccion);
 void Motor_MoverA(float angulo);  // Función principal para mover a un ángulo
-
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 
@@ -121,19 +121,17 @@ Motor_Init();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  // SECUENCIA: 0° → 180° → 0° → 180° ... (infinito)
-
-	          // Girar de 0° a 180° (dirección 1)
-	          Motor_Girar180(1);  // 1 = una dirección
-
-	          // Pequeña pausa entre movimientos
-	          HAL_Delay(500);
-
-	          // Girar de 180° a 0° (dirección 0)
-	          Motor_Girar180(0);  // 0 = dirección contraria
-
-	          // Pequeña pausa antes de repetir
-	          HAL_Delay(500);
+    // Mover suavemente de 0° a 55°
+    Motor_MoverA(55);
+    
+    // Pausa de 1 segundo en la posición de 55°
+    HAL_Delay(1000);
+    
+    // Mover suavemente de 55° a 0°
+    Motor_MoverA(0);
+    
+    // Pausa de 1 segundo antes de repetir (opcional)
+    HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }

@@ -40,8 +40,8 @@
 #define STEP_PORT GPIOA
 
 // PARÁMETROS DEL MOTOR - AJUSTA ESTOS VALORES
-#define PASOS_POR_REVOLUCION   200  // 200 pasos = 360°
-#define VELOCIDAD_MS            2   // Milisegundos entre pulsos (menor = más rápido)
+#define PASOS_POR_REVOLUCION   48  // 200 pasos = 360°
+#define VELOCIDAD_MS            5   // Milisegundos entre pulsos (menor = más rápido)
 
 // Cálculo automático: (200 pasos / 360°) * 180° = 100 pasos
 #define PASOS_180   (PASOS_POR_REVOLUCION / 4)  // 100 pasos para 180°/* USER CODE END PD */
@@ -122,16 +122,16 @@ Motor_Init();
 
     /* USER CODE BEGIN 3 */
     // Mover suavemente de 0° a 55°
-    Motor_MoverA(55);
+    Motor_MoverA(660);
     
     // Pausa de 1 segundo en la posición de 55°
-    HAL_Delay(1000);
+    HAL_Delay(200);
     
     // Mover suavemente de 55° a 0°
     Motor_MoverA(0);
     
     // Pausa de 1 segundo antes de repetir (opcional)
-    HAL_Delay(1000);
+    HAL_Delay(200);
   }
   /* USER CODE END 3 */
 }
